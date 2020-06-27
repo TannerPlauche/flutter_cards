@@ -1,4 +1,4 @@
-import 'package:flashcard_app/widgets/TestWidget.dart';
+import 'package:flashcard_app/widgets/phonemeList.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TestWidget(),
+            PhonemeList(),
             Text(
               'You have pushed the button this many times:',
             ),

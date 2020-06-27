@@ -1,12 +1,14 @@
 import {Injectable} from '@nestjs/common';
-import {Phoneme} from "../../models/phoneme.model";
+import {Phoneme, PhonemeSchema} from "../../models/phoneme.model";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
+import {BaseService} from "../baseService";
 
 @Injectable()
-export class PhonemeService {
+export class PhonemeService extends BaseService<Phoneme> {
 
     constructor(@InjectModel(Phoneme.name) private phonemeModel: Model<Phoneme>) {
+        super(phonemeModel);
     }
 
     getPhonemes(): Promise<Phoneme[]> {
@@ -26,11 +28,11 @@ export class PhonemeService {
         return await this.phonemeModel.findOne({symbol: symbol});
     }
 
-    async createPhoneme(phoneme: Phoneme): Promise<Phoneme> {
-        const newPhoneme = new this.phonemeModel(phoneme);
-        return newPhoneme.save()
-            .catch(err => err);
-    }
+    // async createPhoneme(phoneme: Phoneme): Promise<Phoneme> {
+    //     const newPhoneme = new this.phonemeModel(phoneme);
+    //     return newPhoneme.save()
+    //         .catch(err => err);
+    // }
 
     async updateSymbol(phoneme: Phoneme): Promise<boolean> {
         return this.phonemeModel.updateOne({symbol: phoneme.symbol}, phoneme)
