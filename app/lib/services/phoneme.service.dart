@@ -22,6 +22,19 @@ class PhonemeService {
     {'symbol': 'n', 'letter': 'n'},
     {'symbol': 'o', 'letter': 'o'},
     {'symbol': 'p', 'letter': 'p'},
+    {'symbol': 'r', 'letter': 'r'},
+    {'symbol': 's', 'letter': 's'},
+    {'symbol': 't', 'letter': 't'},
+    {'symbol': 'u', 'letter': 'u'},
+    {'symbol': 'v', 'letter': 'v'},
+    {'symbol': 'w', 'letter': 'w'},
+    {'symbol': 'v', 'letter': 'v'},
+    {'symbol': 'z', 'letter': 'z'},
+    {'symbol': 'sh', 'letter': 'sh'},
+    {'symbol': 'ń', 'letter': 'ń'},
+    {'symbol': 'æ', 'letter': 'æ'},
+    {'symbol': 'th', 'letter': 'th'},
+    {'symbol': 'ch', 'letter': 'ch'},
   ];
 
   static List<Phoneme> getStaticPhonemes() {
