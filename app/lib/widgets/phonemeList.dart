@@ -1,7 +1,10 @@
 import 'package:flashcard_app/services/phoneme.service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flashcard_app/data_classes/phonemeClass.dart';
 
+// NOT USING THIS WIDGET
+// THIS WAS A TEST
 class PhonemeList extends StatefulWidget {
   @override
   _PhonemeListState createState() => _PhonemeListState();
@@ -16,47 +19,12 @@ class _PhonemeListState extends State<PhonemeList> {
     this.getPhonemes();
   }
 
-  void getPhonemes() {
+  Future<List<Phoneme>> getPhonemes() async {
     debugPrint('getting phonems');
     Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
     debugPrint(phonemes.toString());
-    this.setState(() {
-      this.phonemes = phonemes;
-    });
-  }
 
-  Widget renderPhonemes(AsyncSnapshot snapshot) {
-    debugPrint('*********************************');
-    debugPrint(snapshot.connectionState.toString());
-    debugPrint(snapshot.hasData.toString());
-
-    if (snapshot.connectionState == ConnectionState.none &&
-        snapshot.hasData == null) {
-      return Container();
-    }
-
-    if (snapshot.hasData) {
-      return SingleChildScrollView(
-          child: ListView.builder(
-        itemCount: snapshot.data.length,
-        itemBuilder: (context, index) {
-          Phoneme phoneme = snapshot.data[index];
-          return Column(
-            children: <Widget>[
-              Text(phoneme.symbol)
-              // Widget to display the list of phoneme
-            ],
-          );
-        },
-      ));
-    } else {
-      return Container(
-        child: FlatButton(
-          child: Text('load'),
-          onPressed: getPhonemes,
-        ),
-      );
-    }
+    return phonemes;
   }
 
   @override
@@ -64,9 +32,36 @@ class _PhonemeListState extends State<PhonemeList> {
     // TODO: implement build
     return SingleChildScrollView(
         child: FutureBuilder<List<Phoneme>>(
-      future: phonemes,
+      future: getPhonemes(),
       builder: (context, snapshot) {
-        return this.renderPhonemes(snapshot);
+//        if (snapshot.data == null) {
+//          return Column(
+//            children: <Widget>[Text('loading'), CupertinoActivityIndicator()],
+//          );
+//        }
+
+        print(snapshot.data != null ? snapshot.data.length : 'none');
+
+        if (snapshot.data != null) {
+          return Center(
+              child: Column(children: [
+            ListView.builder(
+              itemCount: snapshot.data.length,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(title: Text(snapshot.data[index].symbol));
+              },
+            ),
+          ]));
+        } else {
+          return Container(
+            child: FlatButton(
+              child: Text('load'),
+              onPressed: getPhonemes,
+            ),
+          );
+        }
       },
     ));
   }

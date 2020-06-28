@@ -9,7 +9,11 @@ export class BaseController<T> {
 
     @Get()
     getAll(): Promise<T[]> {
-        return this.dataService.getAll();
+        return this.dataService.getAll()
+            .then(results => {
+                console.log(results);
+                return results;
+            });
     }
 
     @Post()
