@@ -11,7 +11,6 @@ class PhonemeService {
     {'symbol': 'd', 'letter': 'd'},
     {'symbol': 'e', 'letter': 'e'},
     {'symbol': 'f', 'letter': 'f'},
-    {'symbol': 'f', 'letter': 'f'},
     {'symbol': 'g', 'letter': 'g'},
     {'symbol': 'h', 'letter': 'h'},
     {'symbol': 'i', 'letter': 'i'},
