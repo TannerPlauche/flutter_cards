@@ -1,0 +1,1 @@
+ export const DB_CONNECTION = 'mongodb://test:test123@ds253418.mlab.com:53418/zounds';

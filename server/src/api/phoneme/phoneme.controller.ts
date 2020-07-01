@@ -10,11 +10,9 @@ export class PhonemeController extends BaseController<Phoneme> {
         super(phonemeService)
     }
 
-    @Get(':clownshoes')
+    @Get(':symbol')
     getPhonemeBySymbol(@Param() params): Promise<Phoneme> {
-        // queryParams
-        // routeParams
-        const symbol = params.clownshoes;
+        const symbol = params.symbol;
         console.log(symbol);
 
         return this.phonemeService.getPhonemeBySymbol(symbol);

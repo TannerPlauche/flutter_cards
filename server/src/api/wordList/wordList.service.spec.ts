@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { WordListService } from './word-list.service';
+import { WordListService } from './wordList.service';
 
 describe('WordListService', () => {
   let service: WordListService;

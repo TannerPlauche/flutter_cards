@@ -16,8 +16,20 @@ export class BaseController<T> {
             });
     }
 
+    @Get(':id')
+    async getById(@Param() params) {
+        const id = params.id;
+        return this.dataService.getById(id);
+    }
+
     @Post()
     async create(@Body() data: T): Promise<T> {
         return this.dataService.create(data);
+    }
+
+    @Put(':id')
+    async updateById(@Param() params, @Body() data: T): Promise<T> {
+        const id = params.id;
+        return this.dataService.updateById(id, data);
     }
 }
