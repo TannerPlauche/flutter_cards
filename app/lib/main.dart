@@ -28,14 +28,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.grey[300],
       body: Container(
-        child: Flex(direction: Axis.vertical, children: <Widget>[
+        child: Column(children: <Widget>[
 //          Column(
 //            children: <Widget>[
           PhonemeGrid(),

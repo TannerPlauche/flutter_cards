@@ -34,12 +34,6 @@ class _PhonemeListState extends State<PhonemeList> {
         child: FutureBuilder<List<Phoneme>>(
       future: getPhonemes(),
       builder: (context, snapshot) {
-//        if (snapshot.data == null) {
-//          return Column(
-//            children: <Widget>[Text('loading'), CupertinoActivityIndicator()],
-//          );
-//        }
-
         print(snapshot.data != null ? snapshot.data.length : 'none');
 
         if (snapshot.data != null) {

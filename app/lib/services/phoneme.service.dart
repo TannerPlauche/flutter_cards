@@ -45,6 +45,7 @@ class PhonemeService {
 
   static Future<List<Phoneme>> getAllPhonemes() async {
     final response = await http.get('http://localhost:3000/phoneme');
+//    final response = await http.get('http://10.0.2.2:3000/phoneme');
 
     if (response.statusCode == 200) {
       var phonemes = json.decode(response.body);
@@ -52,6 +53,7 @@ class PhonemeService {
 
       for (var p in phonemes) {
         var newPhoneme = new Phoneme(symbol: p["symbol"], letter: p["letter"]);
+        print(newPhoneme);
         phonemeList.add(newPhoneme);
       }
 //      print(phonemeList.length);

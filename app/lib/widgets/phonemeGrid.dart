@@ -10,7 +10,15 @@ class PhonemeGrid extends StatefulWidget {
 }
 
 class _PhonemeGridState extends State<PhonemeGrid> {
-  final List<Phoneme> phonemes = PhonemeService.getStaticPhonemes();
+  final Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
+
+  Future<List<Phoneme>> getPhonemes() async {
+    debugPrint('getting phonems');
+    Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
+    debugPrint(phonemes.toString());
+
+    return phonemes;
+  }
 
   void selectPhoneme(Phoneme phoneme) {
     print(phoneme.symbol);
@@ -26,40 +34,51 @@ class _PhonemeGridState extends State<PhonemeGrid> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Expanded(
-      child: SizedBox(
-        child: GridView.count(
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 3,
-            children: phonemes.map((phoneme) {
-              return GestureDetector(
-                onTap: () {
-                  selectPhoneme(phoneme);
-                },
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  child: Center(
-                    child: Text(
-                      phoneme.symbol,
-                      style: TextStyle(
-                        fontSize: 75.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-//                color: Colors.teal[100],
-                  decoration: BoxDecoration(
-                    color: Colors.teal[200],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              );
-            }).toList()),
-      ),
-    );
+    return FutureBuilder(
+        future: getPhonemes(),
+        builder: (context, snapshot) {
+//          print(snapshot.data != null ? snapshot.data.length : 'none');
+          print(snapshot.data);
+          if (snapshot.data != null) {
+            return Expanded(
+              child: SizedBox(
+                child: GridView.builder(
+                    primary: false,
+                    padding: const EdgeInsets.all(20),
+                    itemCount: snapshot.data.length,
+                    gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3),
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          selectPhoneme(snapshot.data[index]);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          margin: EdgeInsets.all(5),
+                          child: Center(
+                            child: Text(
+                              snapshot.data[index].symbol,
+                              style: TextStyle(
+                                fontSize: 75.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+//                          color: ThemeData.light(Colors.teal),
+                          decoration: BoxDecoration(
+                            color: Colors.teal[200],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
   }
 }

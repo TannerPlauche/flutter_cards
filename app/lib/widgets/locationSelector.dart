@@ -49,8 +49,8 @@ class _LocationSelectorState extends State<LocationSelector> {
               child: Container(
                 margin: EdgeInsetsDirectional.fromSTEB(0, 80, 0, 0),
                 child: Container(
-                  padding: EdgeInsets.all(20),
-                  margin: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 10),
+//                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.teal[200]),
