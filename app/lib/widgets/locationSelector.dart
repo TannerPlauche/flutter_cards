@@ -15,12 +15,11 @@ class LocationSelector extends StatefulWidget {
 
 class _LocationSelectorState extends State<LocationSelector> {
   Phoneme selectedPhoneme;
-  List<String> locations = ["Begining", "Middle", "End"];
+  List<String> locations = ["Beginning", "Middle", "End"];
 
   _LocationSelectorState(this.selectedPhoneme);
 
   void selectLocation(String location) {
-    print('${location}, ${selectedPhoneme.symbol}');
     Navigator.push(
       context,
       MaterialPageRoute(

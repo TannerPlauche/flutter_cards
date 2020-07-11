@@ -10,18 +10,21 @@ class PhonemeGrid extends StatefulWidget {
 }
 
 class _PhonemeGridState extends State<PhonemeGrid> {
-  final Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
+  Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
+
+  @override
+  void initState() {
+    super.initState();
+    phonemes = getPhonemes();
+  }
 
   Future<List<Phoneme>> getPhonemes() async {
-    debugPrint('getting phonems');
     Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
-    debugPrint(phonemes.toString());
-
     return phonemes;
   }
 
   void selectPhoneme(Phoneme phoneme) {
-    print(phoneme.symbol);
+//    print(phoneme.symbol);
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -35,10 +38,8 @@ class _PhonemeGridState extends State<PhonemeGrid> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return FutureBuilder(
-        future: getPhonemes(),
+        future: phonemes,
         builder: (context, snapshot) {
-//          print(snapshot.data != null ? snapshot.data.length : 'none');
-          print(snapshot.data);
           if (snapshot.data != null) {
             return Expanded(
               child: SizedBox(

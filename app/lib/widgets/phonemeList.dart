@@ -20,9 +20,9 @@ class _PhonemeListState extends State<PhonemeList> {
   }
 
   Future<List<Phoneme>> getPhonemes() async {
-    debugPrint('getting phonems');
+//    debugPrint('getting phonems');
     Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
-    debugPrint(phonemes.toString());
+//    debugPrint(phonemes.toString());
 
     return phonemes;
   }

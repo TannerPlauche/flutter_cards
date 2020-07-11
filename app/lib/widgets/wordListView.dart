@@ -1,4 +1,6 @@
 import 'package:flashcard_app/data_classes/phonemeClass.dart';
+import 'package:flashcard_app/data_classes/wordListClass.dart';
+import 'package:flashcard_app/services/wordList.service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +18,21 @@ class WordListView extends StatefulWidget {
 class _WordListViewState extends State<WordListView> {
   final String location;
   final Phoneme selectedPhoneme;
+  Future<WordList> wordList;
 
   _WordListViewState(this.selectedPhoneme, this.location);
+
+  @override
+  void initState() {
+    super.initState();
+    wordList = getWordList();
+  }
+
+  Future<WordList> getWordList() {
+    Future<WordList> futureWordList =
+        WordListService.getAllWordList(selectedPhoneme.symbol, location);
+    return futureWordList;
+  }
 
   void navigateHome() {
     Navigator.of(context).popUntil((route) => route.isFirst);
@@ -46,6 +61,27 @@ class _WordListViewState extends State<WordListView> {
                 child: Text("Phoneme: ${selectedPhoneme.symbol}"),
               ),
               Text("location: $location"),
+              FutureBuilder(
+                  future: wordList,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.data != null) {
+//                      return Text('got data');
+                      return Center(
+                        child: Container(
+                          margin: EdgeInsetsDirectional.fromSTEB(0, 70, 0, 0),
+                          width: 300,
+                          child: Column(
+                            children: <Widget>[
+                              Image.network(snapshot.data.wordList[1].imageUrl),
+                              Text(snapshot.data.wordList[1].word)
+                            ],
+                          ),
+                        ),
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  })
             ],
           ),
         ),

@@ -16,7 +16,12 @@ export class WordListController extends BaseController<WordList> {
         const symbol = params.symbol;
         const location = params.location;
 
-        return this.wordListService.getBySymbolAndLocation(symbol, location);
+        return this.wordListService.getBySymbolAndLocation(symbol, location)
+            .then(results => {
+                console.log(results);
+                return results;
+            });
+        ;
     }
 
 

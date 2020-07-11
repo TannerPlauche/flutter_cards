@@ -53,12 +53,9 @@ class PhonemeService {
 
       for (var p in phonemes) {
         var newPhoneme = new Phoneme(symbol: p["symbol"], letter: p["letter"]);
-        print(newPhoneme);
         phonemeList.add(newPhoneme);
       }
-//      print(phonemeList.length);
       return phonemeList;
-//      return phonemes.map((phoneme) => Phoneme.fromJson(phoneme)).toList();
     } else {
       throw Exception('Failed to fetch phoneme data');
     }
