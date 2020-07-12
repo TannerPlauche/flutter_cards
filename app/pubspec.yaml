@@ -21,6 +21,8 @@ dependencies:
     sdk: flutter
   http: ^0.12.1
   cupertino_icons: ^0.1.2
+  build_runner: 1.10.0
+  json_serializable: 3.3.0
   carousel_slider: 2.2.1
 
 dev_dependencies:

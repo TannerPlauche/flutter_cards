@@ -48,14 +48,11 @@ class PhonemeService {
 //    final response = await http.get('http://10.0.2.2:3000/phoneme');
 
     if (response.statusCode == 200) {
-      var phonemes = json.decode(response.body);
-      List<Phoneme> phonemeList = [];
+      var phonemesJson = json.decode(response.body);
 
-      for (var p in phonemes) {
-        var newPhoneme = new Phoneme(symbol: p["symbol"], letter: p["letter"]);
-        phonemeList.add(newPhoneme);
-      }
-      return phonemeList;
+      return (phonemesJson as List)
+          .map((phonemeJson) => new Phoneme.fromJson(phonemeJson))
+          .toList();
     } else {
       throw Exception('Failed to fetch phoneme data');
     }

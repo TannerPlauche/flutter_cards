@@ -1,5 +1,9 @@
-import 'package:flashcard_app/data_classes/WordCardClass.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:flashcard_app/data_classes/wordCardClass.dart';
 
+part 'wordListClass.g.dart';
+
+@JsonSerializable()
 class WordList {
   String symbol;
   String location;
@@ -7,22 +11,8 @@ class WordList {
 
   WordList({this.symbol, this.location, this.wordList});
 
-  factory WordList.fromJson(Map<String, dynamic> wordListJson) {
-//    List<WordCard> wordCards = [];
-//    for (var wordCardJson in wordListJson['wordList']) {
-//      var newWordCard = new WordCard.fromJson(wordCardJson);
-//      wordCards.add(newWordCard);
-//    }
-
-    WordList wordList = new WordList(
-        symbol: wordListJson['symbol'],
-        location: wordListJson['location'],
-//        wordList: wordCards);
-        wordList: (wordListJson['wordList'] as List)
-            .map((wordCardJson) => new WordCard.fromJson(wordCardJson))
-            .toList());
-    return wordList;
-  }
+  factory WordList.fromJson(Map<String, dynamic> wordListJson) =>
+      _$WordListFromJson(wordListJson);
 
   @override
   String toString() {

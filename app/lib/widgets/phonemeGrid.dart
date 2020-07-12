@@ -10,7 +10,7 @@ class PhonemeGrid extends StatefulWidget {
 }
 
 class _PhonemeGridState extends State<PhonemeGrid> {
-  Future<List<Phoneme>> phonemes = PhonemeService.getAllPhonemes();
+  Future<List<Phoneme>> phonemes;
 
   @override
   void initState() {
